@@ -19,12 +19,13 @@ on:
     branches: [ "master" ]
   
 jobs:
+  analyze:
     name: Analyze
     runs-on: ubuntu-latest
     permissions:
-    actions: read
-    contents: read
-    security-events: write
+      actions: read
+      contents: read
+      security-events: write
 
     strategy:
       fail-fast: false
@@ -38,14 +39,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-    - name: Precompile JSP files
-    run: |
-      mkdir -p WEB-INF/classes
-      javac -cp "/path/to/tomcat/lib/*" -d WEB-INF/classes/ 
-      src/main/webapp/*.jsp
 
-    # Initializes the CodeQL tools for scanning.  
-    
+    # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
@@ -77,7 +72,4 @@ jobs:
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
       with:
-     language: 'java'
-     queries: 'security-extended'
-    # Include compiled JSP files in the analysis
-    additional-path: 'WEB-INF/classes/'
+        category: "/language:${{matrix.language}}"
