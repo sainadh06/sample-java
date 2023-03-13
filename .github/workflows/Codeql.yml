@@ -19,14 +19,14 @@ on:
     branches: [ "master" ]
   
 jobs:
-    name: Analyze
-    runs-on: ubuntu-latest
-    permissions:
+   # name: Analyze
+     runs-on: ubuntu-latest
+     permissions:
       actions: read
       contents: read
       security-events: write
 
-    strategy:
+     strategy:
       fail-fast: false
       matrix:
         language: [ 'java' ]
@@ -35,15 +35,15 @@ jobs:
         # Use only 'javascript' to analyze code written in JavaScript, TypeScript or both
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    - name: Precompile JSP files
-      run:
-       mkdir -p WEB-INF/classes
-       javac -cp "/path/to/tomcat/lib/*" -d WEB-INF/classes/ 
-       src/main/webapp/*.jsp
-      with:
+     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Precompile JSP files
+     run:
+        mkdir -p WEB-INF/classes
+        javac -cp "/path/to/tomcat/lib/*" -d WEB-INF/classes/ 
+        src/main/webapp/*.jsp
+     with:
         languages: ${{ matrix.language }}
         queries: security-extended, security-and-quality
         # If you wish to specify custom queries, you can do so here or in a config file.
@@ -56,8 +56,8 @@ jobs:
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v2
+       - name: Autobuild
+         uses: github/codeql-action/autobuild@v2
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
@@ -69,10 +69,10 @@ jobs:
     #     echo "Run, Build Application using script"
     #     ./location_of_script_within_repo/buildscript.sh
 
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
-      with:
-      language: 'java'
-      queries: 'security-extended'
+     - name: Perform CodeQL Analysis
+       uses: github/codeql-action/analyze@v2
+       with:
+       language: 'java'
+       queries: 'security-extended'
     # Include compiled JSP files in the analysis
-      additional-path: 'WEB-INF/classes/'
+       additional-path: 'WEB-INF/classes/'
