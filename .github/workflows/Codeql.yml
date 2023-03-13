@@ -19,7 +19,6 @@ on:
     branches: [ "master" ]
   
 jobs:
-  analyze:
     name: Analyze
     runs-on: ubuntu-latest
     permissions:
@@ -73,9 +72,7 @@ jobs:
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
       with:
-    language: 'java'
-    queries: 'security-extended'
+      language: 'java'
+      queries: 'security-extended'
     # Include compiled JSP files in the analysis
-    additional-path: 'WEB-INF/classes/'
-
-        category: "/language:${{matrix.language}}"
+      additional-path: 'WEB-INF/classes/'
