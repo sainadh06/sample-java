@@ -69,10 +69,10 @@ jobs:
     #     echo "Run, Build Application using script"
     #     ./location_of_script_within_repo/buildscript.sh
 
-     - name: Perform CodeQL Analysis
-       uses: github/codeql-action/analyze@v2
-       with:
-       language: 'java'
-       queries: 'security-extended'
-    # Include compiled JSP files in the analysis
-       additional-path: 'WEB-INF/classes/'
+    - name: Perform CodeQL Analysis
+uses: github/codeql-action/analyze@v2
+with:
+language: 'java'
+queries: 'security-extended'
+# Include compiled JSP files in the analysis
+additional-path: 'WEB-INF/classes/'
