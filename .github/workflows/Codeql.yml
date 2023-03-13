@@ -40,7 +40,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
     - name: Precompile JSP files
-       run:
+      run:
        mkdir -p WEB-INF/classes
        javac -cp "/path/to/tomcat/lib/*" -d WEB-INF/classes/ 
        src/main/webapp/*.jsp
